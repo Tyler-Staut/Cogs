@@ -1,2 +1,2 @@
-# tylers-discord-cogs
-Cogs for Red-DiscordBot
+# Red-Shodan
+Shodan Cog for Red-DiscordBot
