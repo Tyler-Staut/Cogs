@@ -1,2 +1,2 @@
-# Red-Shodan
-Shodan Cog for Red-DiscordBot
+# Discord-Cogs
+Cogs for Red-DiscordBot
