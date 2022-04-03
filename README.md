@@ -19,7 +19,7 @@ To add this cogs to your instance, run this command first (`[p]` is your bot pre
 Then install the shodan cog:
 
 ```
-[p]cog install discord-cogs shodan_cog
+[p]cog install red-shodan shodan_cog
 ```
 
 If you'd like to contact me, test out my cogs, or stay up to date on my cogs, feel free to reach out!
