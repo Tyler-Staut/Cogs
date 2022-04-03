@@ -1,24 +1,28 @@
-# Discord-Cogs
+# Red-Shodan
 
-Cogs for [Red-DiscordBot](https://github.com/Cog-Creators/Red-DiscordBot/releases)
+Shodan.io Cog for [Red-DiscordBot](https://github.com/Cog-Creators/Red-DiscordBot/releases)
 
 [![Red-DiscordBot](https://img.shields.io/badge/red--discordbot-v3-red)](https://github.com/Cog-Creators/Red-DiscordBot/releases)
 
-To add these cogs to your instance, run this command first (`[p]` is your bot prefix):
+Before installing the cog I recommend adding your shodan api key otherwise you will have to reload the cog, you can do that with:
 
 ```
-[p]repo add discord-cogs https://github.com/Tyler-Staut/Discord-Cogs
+[p]set api shodan api_key <YOUR_API_KEY>
 ```
 
-Then install your cog(s) of choice:
+To add this cogs to your instance, run this command first (`[p]` is your bot prefix):
 
 ```
-[p]cog install discord-cogs <cog_name>
+[p]repo add red-shodan https://github.com/Tyler-Staut/Discord-Cogs
+```
+
+Then install the shodan cog:
+
+```
+[p]cog install discord-cogs shodan_cog
 ```
 
 If you'd like to contact me, test out my cogs, or stay up to date on my cogs, feel free to reach out!
-
-## The List of Cogs
 
 ### Shodan_Cog
 
