@@ -3,8 +3,8 @@
 Shodan.io Cog for [Red-DiscordBot](https://github.com/Cog-Creators/Red-DiscordBot/releases)
 
 [![Red-DiscordBot](https://img.shields.io/badge/red--discordbot-v3-red)](https://github.com/Cog-Creators/Red-DiscordBot/releases)
-[![Known Vulnerabilities](https://snyk.io/test/github/Tyler-Staut/Red-Shodan/badge.svg)](https://snyk.io/test/github/Tyler-Staut/Red-Shodan)
 [![Maintainability](https://api.codeclimate.com/v1/badges/3db4b541d3f352d4a3e0/maintainability)](https://codeclimate.com/github/Tyler-Staut/Red-Shodan/maintainability)
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![GitHub version](https://badge.fury.io/gh/Tyler-Staut%2FRed-Shodan.svg)](https://badge.fury.io/gh/Tyler-Staut%2FRed-Shodan)
 
 Before installing the cog I recommend adding your shodan api key otherwise you will have to reload the cog, you can do that with:
