@@ -4,13 +4,13 @@
 #
 #    pip-compile requirements.in
 #
-aiohttp==3.8.0.post0
+aiohttp==3.7.4.post0
     # via discord-py
 async-timeout==3.0.1
     # via aiohttp
 attrs==21.4.0
     # via aiohttp
-certifi==2021.10.8
+certifi==2023.7.22
     # via requests
 chardet==4.0.0
     # via aiohttp
@@ -28,7 +28,7 @@ discord==1.7.3
     # via -r requirements.in
 discord-py==1.7.3
     # via discord
-idna==3.3
+idna==3.7
     # via
     #   requests
     #   yarl
@@ -36,13 +36,13 @@ multidict==6.0.2
     # via
     #   aiohttp
     #   yarl
-requests==2.27.1
+requests==2.32.0
     # via shodan
 shodan==1.27.0
     # via -r requirements.in
 typing-extensions==4.1.1
     # via aiohttp
-urllib3==1.26.9
+urllib3==1.26.18
     # via requests
 xlsxwriter==3.0.3
     # via shodan
