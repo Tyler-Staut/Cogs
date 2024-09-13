@@ -1,9 +1,5 @@
-from redbot.core.bot import Red
-
-from .hybrid_analysis import hybrid_analysis
+from .hybrid_analysis import ApiTools
 
 
-async def setup(bot: Red) -> None:
-    cog = hybrid_analysis(bot)
-    bot.add_cog(cog)
-    await cog.initialize()
+async def setup(bot):
+    await bot.add_cog(hybrid_analysis(bot))

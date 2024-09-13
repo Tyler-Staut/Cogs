@@ -19,10 +19,6 @@ class shodan(commands.Cog):
         api_token = await self.bot.get_shared_api_tokens("shodan")
         self.api_token = api_token
 
-        for importer, module_name, is_pkg in pkgutil.iter_modules(modules.__path__):
-            if module_name not in self.modules:
-                self.modules.append(module_name)
-
     async def red_delete_data_for_user(
         self, *, requester: RequestType, user_id: int
     ) -> None:
