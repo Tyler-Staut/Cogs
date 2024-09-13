@@ -5,19 +5,17 @@ import sys
 import pkgutil
 import os
 import importlib
-
-from . import modules
-
-from .modules import search
+import aiohttp
+import requests
 
 from redbot.core import commands
 from redbot.core.bot import Red
 from redbot.core.config import Config
 
-
 from redbot.core.data_manager import bundled_data_path
 from redbot.core.utils.chat_formatting import escape, pagify
 from redbot.core.utils.menus import DEFAULT_CONTROLS, menu
+
 
 RequestType = Literal["discord_deleted_user", "owner", "user", "user_strict"]
 
@@ -45,7 +43,9 @@ class shodan_cog(commands.Cog):
             if module_name not in self.modules:
                 self.modules.append(module_name)
 
-    async def red_delete_data_for_user(self, *, requester: RequestType, user_id: int) -> None:
+    async def red_delete_data_for_user(
+        self, *, requester: RequestType, user_id: int
+    ) -> None:
         # TODO: Replace this with the proper end user data removal handling.
         super().red_delete_data_for_user(requester=requester, user_id=user_id)
 
@@ -68,10 +68,35 @@ class shodan_cog(commands.Cog):
         await ctx.send("Current Supported Functions:")
         await ctx.send(modules_list)
 
-
     @shodan.command()
-    async def upload(self, ctx, *, query: str):
-        """This does stuff!"""
-        # Your code will go here
-        embed = upload.get_result(query, self.api_token)
-        await ctx.send(embed=embed)
+    async def upload(self, ctx, *, query: str = None):
+        """Upload a file or URL to Hybrid Analysis for scanning"""
+        if ctx.message.attachments:
+            # Handle file upload
+            file = ctx.message.attachments[0]
+            file_bytes = await file.read()
+            async with aiohttp.ClientSession() as session:
+                async with session.post(
+                    "https://www.hybrid-analysis.com/api/v2/quick-scan/file",
+                    headers={"api-key": self.api_token["api_key"]},
+                    data={"file": file_bytes},
+                ) as response:
+                    result = await response.json()
+        elif query:
+            # Handle URL upload
+            async with aiohttp.ClientSession() as session:
+                async with session.post(
+                    "https://www.hybrid-analysis.com/api/v2/quick-scan/url",
+                    headers={"api-key": self.api_token["api_key"]},
+                    json={"url": query},
+                ) as response:
+                    result = await response.json()
+        else:
+            await ctx.send("Please provide a URL or attach a file to upload.")
+            return
+
+        # Send the results back to Discord
+        if result.get("job_id"):
+            await ctx.send(f"Scan submitted successfully. Job ID: {result['job_id']}")
+        else:
+            await ctx.send("Failed to submit scan. Please try again.")
