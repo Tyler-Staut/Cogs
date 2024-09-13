@@ -20,7 +20,7 @@ from redbot.core.utils.menus import DEFAULT_CONTROLS, menu
 RequestType = Literal["discord_deleted_user", "owner", "user", "user_strict"]
 
 
-class shodan_cog(commands.Cog):
+class hybrid_analysis(commands.Cog):
     """
     Hybrid Analysis for Discord
     """
@@ -36,12 +36,8 @@ class shodan_cog(commands.Cog):
         self.modules = []
 
     async def initialize(self):
-        api_token = await self.bot.get_shared_api_tokens("shodan")
+        api_token = await self.bot.get_shared_api_tokens("hybrid-analysis")
         self.api_token = api_token
-
-        for importer, module_name, is_pkg in pkgutil.iter_modules(modules.__path__):
-            if module_name not in self.modules:
-                self.modules.append(module_name)
 
     async def red_delete_data_for_user(
         self, *, requester: RequestType, user_id: int
@@ -50,13 +46,13 @@ class shodan_cog(commands.Cog):
         super().red_delete_data_for_user(requester=requester, user_id=user_id)
 
     @commands.group()
-    async def shodan(self, ctx):
+    async def hybrid_analysis(self, ctx):
         api_token = self.api_token
         if api_token.get("api_key") is None:
-            return await ctx.send("The Shodan API key has not been set.")
+            return await ctx.send("The Hybrid Analysis API key has not been set.")
         # Use the API key to access content as you normally would
 
-    @shodan.command()
+    @hybrid_analysis.command()
     async def modules(self, ctx):
         """
         List all available modules
@@ -68,7 +64,7 @@ class shodan_cog(commands.Cog):
         await ctx.send("Current Supported Functions:")
         await ctx.send(modules_list)
 
-    @shodan.command()
+    @hybrid_analysis.command()
     async def upload(self, ctx, *, query: str = None):
         """Upload a file or URL to Hybrid Analysis for scanning"""
         if ctx.message.attachments:
@@ -82,21 +78,4 @@ class shodan_cog(commands.Cog):
                     data={"file": file_bytes},
                 ) as response:
                     result = await response.json()
-        elif query:
-            # Handle URL upload
-            async with aiohttp.ClientSession() as session:
-                async with session.post(
-                    "https://www.hybrid-analysis.com/api/v2/quick-scan/url",
-                    headers={"api-key": self.api_token["api_key"]},
-                    json={"url": query},
-                ) as response:
-                    result = await response.json()
-        else:
-            await ctx.send("Please provide a URL or attach a file to upload.")
-            return
-
-        # Send the results back to Discord
-        if result.get("job_id"):
-            await ctx.send(f"Scan submitted successfully. Job ID: {result['job_id']}")
-        else:
-            await ctx.send("Failed to submit scan. Please try again.")
+                    await ctx.send(f"Scan result: {result}")
