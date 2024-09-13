@@ -1,4 +1,5 @@
 import discord
+from hybrid_analysis.hybrid_analysis import RequestType
 from redbot.core import commands, Config
 import pkgutil
 import shodan
@@ -18,12 +19,6 @@ class shodan(commands.Cog):
     async def initialize(self):
         api_token = await self.bot.get_shared_api_tokens("shodan")
         self.api_token = api_token
-
-    async def red_delete_data_for_user(
-        self, *, requester: RequestType, user_id: int
-    ) -> None:
-        # TODO: Replace this with the proper end user data removal handling.
-        super().red_delete_data_for_user(requester=requester, user_id=user_id)
 
     @commands.group()
     async def shodan(self, ctx):
