@@ -23,7 +23,7 @@ Before installing the cog I recommend adding your shodan api key otherwise you w
 To add this cogs to your instance, run this command first (`[p]` is your bot prefix):
 
 ```
-[p]repo add red-shodan https://github.com/Tyler-Staut/Tylers-Cogs
+[p]repo add tylers-cogs https://github.com/Tyler-Staut/Tylers-Cogs
 ```
 
 Then install the shodan cog:
